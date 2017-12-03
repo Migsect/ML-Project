@@ -91,7 +91,7 @@ def main():
 	data = json.load(open(data_file, 'r', encoding='ascii'))	
 
 	# retrieving the user-text pairs
-	documents = getDocuments(data[:5000])
+	documents = getDocuments(data)
 	print("\n{} valid documents found".format(len(documents)))
 
 	# Getting the word metrics
