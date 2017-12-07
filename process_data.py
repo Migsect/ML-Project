@@ -1,5 +1,4 @@
 #!/usr/bin/python
-
 # Imports
 import json
 import matplotlib.pyplot as plt
@@ -8,13 +7,14 @@ import os
 import sys
 
 # Options
-top_users = 10
+top_users = int(sys.argv[1]) if len(sys.argv) > 1 else 10
 
 # Locations
 data_file = './data/forum-data.json'
 
 # Converts the data into a (user, words[]) tuple list
 def getDocuments(data):
+
 	documents = []
 	print("Processing Documents:")
 	for index, d in enumerate(data):
@@ -119,7 +119,8 @@ def main():
 	for user_count in user_counts_sorted[-top_users:]:
 		print("\t{}: {}".format(user_count[0], user_count[1]))
 
-	documents = [d for d in documents if d['user'] in [user[0] for user in user_counts_sorted]]
+	# Selecting only the top N users
+	documents = [d for d in documents if d['user'] in [user[0] for user in user_counts_sorted[-top_users:]]]
 
 	print('\nSaving {} documents'.format(len(documents)))
 
