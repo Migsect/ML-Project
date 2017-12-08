@@ -98,7 +98,7 @@ def main():
 	word_counts, word_inclusion = wordMetrics(documents)
 	
 	# Getting rid of documents we know to not be used.
-	documents= filterLength(documents) 
+	documents = filterLength(documents) 
 
 	# Filtering the documents of the bad words
 	documents, remove_words = filterWords(documents, word_inclusion)
@@ -106,6 +106,12 @@ def main():
 
 	# Filtering the list of documents who now may have less than the word threshold
 	documents = filterLength(documents)
+	print("\n{} remaining documents".format(len(documents)))
+
+	users = set()
+	for d in documents:
+		users.add(d['user'])
+	print("\nUnique Users: {}".format(len(users)))
 
 	# Sorting users based on their number of documents
 	user_counts = {}
