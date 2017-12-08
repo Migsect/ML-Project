@@ -278,6 +278,11 @@ def main():
 	# Training the model
 	model = trainNaiveBayes(training_data)
 
+	# Printing the priors:
+	print("\nPriors Listing:")
+	for user, prior in model['priors'].items():
+		print("\t{}: {}".format(user, prior))
+
 	# Applying the model to the training data
 	print("\nAnalyzing Training Data Set:")
 	training_results = applyNaiveBayes(model, training_data)
@@ -300,7 +305,7 @@ def main():
 	partial_10_accuracy_testing = []
 
 	for split_ratio in splits:
-		training_data, testing_data = randomlySplitData(data, training_ratio)
+		training_data, testing_data = randomlySplitData(data, split_ratio)
 		training_results = applyNaiveBayes(model, training_data)
 		testing_results = applyNaiveBayes(model, testing_data)
 
@@ -323,7 +328,7 @@ def main():
 	
 	plt.legend()
 	plt.title("Accuracy for Various Split Ratios")
-	plt.xlabel("Split Ratio (training / testing")
+	plt.xlabel("Split Ratio (training / testing)")
 	plt.ylabel("Accuracy")
 	plt.ylim(0.5, 1.0)
 	# Showing all then plots
